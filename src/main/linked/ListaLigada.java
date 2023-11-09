@@ -7,19 +7,43 @@ public class ListaLigada implements EstruturaElementar{
     private No cabeca;
 
     public ListaLigada() {
-
+        cabeca = null;
     }
 
     @Override
     public boolean buscaElemento(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaElemento'");
+        No n = new No(valor);
+        n = this.cabeca;
+        while (true) {
+            if(n != null) {
+                if (n.getValor() == valor){
+                    return true;
+                } else {
+                    n = n.getProximo();
+                }
+            }
+            else {
+                break;
+            }
+        }
+        return false;
     }
 
     @Override
     public int buscaIndice(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaIndice'");
+        No n = new No(valor);
+        n = this.cabeca;
+        int count = 0;
+        while (true) {
+            if (n != null) {
+                if(valor == count){
+                    return n.getValor();
+                } else {
+                    n = n.getProximo();
+                }
+                count += 1;
+            }
+        }
     }
 
     @Override
@@ -60,14 +84,28 @@ public class ListaLigada implements EstruturaElementar{
 
     @Override
     public void insereInicio(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereInicio'");
+        if(this.cabeca == null) {
+            this.cabeca = new No(valor);
+        } else {
+            No n = new No(valor);
+            n.setProximo(this.cabeca);
+            this.cabeca = n;
+        }
+        
     }
 
     @Override
     public void insereFim(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereFim'");
+       No n = new No(valor);
+        if (cabeca == null) {
+            cabeca = n;
+        } else {
+            No atual = cabeca;
+            while (atual.getProximo() != null) {
+               atual = atual.getProximo(); 
+            }
+            atual.setProximo(n);
+       }
     }
 
     @Override
